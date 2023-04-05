@@ -1,5 +1,5 @@
 # Group Name: Paavo Nurmi (Gavin Reinhard, Sarah Ouellette, Zach Kelly, & Jakob Fisher)
-# Email: reinhagn@mail.uc.edu,,,fishe2jo@mail.uc.edu
+# Email: reinhagn@mail.uc.edu, ouellesj@mail.uc.edu,,fishe2jo@mail.uc.edu
 # Assignment Title: Assignment 10
 # Course: IS 4010
 # Semester/Year: Spring 2023
@@ -13,7 +13,11 @@ import json
 response = requests.get('https://api.nal.usda.gov/fdc/v1/foods/list?api_key=Aflg26pw9eo9hsOT8tH4eJvgCXpMTZ4yfJ0xUOz3') # Make a request to a web server and store results in response.
 json_string = response.content # Extract data from response and store in a string. 
 
-json_parsed = json.loads(json_string) #this parses the json content pull and puts it in a python dictionary
-print(json_parsed[0]['description']) # Example for how to use the API, get rid of this before submitting. json_string needs to be parsed first.
+json_parsed = json.loads(json_string) #this parses the json content pull and puts it in a python dictionary#print(json_parsed[0]['description']) # Example for how to use the API, get rid of this before submitting. json_string needs to be parsed first.
+
+interestingFact = json_parsed[10]['description']
+nutrients = json_parsed[10]['foodNutrients'] #drill down into the nested dictionary 'foodNutrients'
+protein = str(nutrients[2]['amount']) + nutrients[2]['unitName'] + " of " + nutrients[2]['name']
+print(interestingFact, 'has', protein)
 
 
